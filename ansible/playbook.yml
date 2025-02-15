@@ -1,0 +1,16 @@
+- name: Deploy Microservices
+  hosts: all
+  become: yes
+  tasks:
+    - name: Install Docker
+      apt:
+        name: docker.io
+        state: present
+
+    - name: Run Microservice
+      docker_container:
+        name: microservice
+        image: myorg/microservice:latest
+        state: started
+        ports:
+          - "443:443"
